@@ -2,6 +2,19 @@ scale-crop-rotate
 =================
 Scale, crop and rotate images, not blocking UI :unlock:.
 
+```javascript
+const image = document.getElementsByTagName('img')[0];
+const progress = document.getElementsByTagName('progress')[0];
+
+scaleCropRotate(imgToImageData(image), 384, 190)
+.progress(value => {
+  progress.value = value;
+})
+.then(data => {
+  image.src = imageDataToDataUrl(imageData);
+});
+```
+
 
 
 UI unblock
