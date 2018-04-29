@@ -1,0 +1,42 @@
+{
+  "name": "scale-crop-rotate",
+  "version": "1.0.0",
+  "description": "Scale, crop and rotate images, not blocking UI.",
+  "main": "./dist/scale-crop-rotate.js",
+  "scripts": {
+    "build": "make build",
+    "postpublish": "make postpublish",
+    "prepublish": "npm run build",
+    "pretest": "npm run build",
+    "start": "http-server ./ -c-1",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ytiurin/scale-crop-rotate.git"
+  },
+  "keywords": [
+    "crop",
+    "image",
+    "rotate",
+    "resize",
+    "scale"
+  ],
+  "author": {
+    "name": "Eugene Tiurin",
+    "email": "yevhentiurin@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ytiurin/scale-crop-rotate/issues"
+  },
+  "homepage": "https://github.com/ytiurin/scale-crop-rotate#readme",
+  "buildConfig": {
+    "globalExportName": "scaleCropRotate"
+  },
+  "devDependencies": {
+    "canvas": "^1.6.10",
+    "http-server": "^0.11.1",
+    "jest": "^22.4.3"
+  }
+}

@@ -1,2 +1,2 @@
 # scale-crop-rotate
-Scale, crop and rotate an image in one pass.
+Scale, crop and rotate images, not blocking UI.
