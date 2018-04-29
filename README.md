@@ -1,6 +1,6 @@
 scale-crop-rotate
 =================
-Scale, crop and rotate images, not blocking UI.
+Scale, crop and rotate images, not blocking UI :unlock:.
 
 
 
@@ -69,7 +69,7 @@ A [`Boolean`] switch forces function to work in syncronous mode. In this case fu
 
 ### Return values
 #### Async mode
-A [`Promise`] that resolves to an [`ImageData`] containing the resulting image. A [`Promise`] is extended with the `.progress()` method that recieves a `function` as an argument to handle the image processing progress.
+A [`Promise`] that resolves with an [`ImageData`] containing the resulting image. A [`Promise`] is extended with the `.progress()` method that recieves a `function` as an argument to handle the image processing progress.
 
 #### Sync mode
 An [`ImageData`] containing the resulting image.
