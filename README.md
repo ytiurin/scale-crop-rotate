@@ -76,7 +76,7 @@ A [`Number`] indicating the height of the area that will be transfered from the 
 A [`Number`] representing the [Exif Orientation Tag], or a [`DOMString`] containig one of predefined rotation values: `90deg`, `180deg`, `270deg`, `horizontal`, `vertical`. Last two predefined values allow to mirror image horizontally and vertically.
 
 #### enableSyncMode
-A [`Boolean`] switch forces function to work in syncronous mode. In this case funcion works faster, but blocks the UI.
+A [`Boolean`] switch forces function to work in syncronous mode. In this case funcion overall execution time is faster, but it blocks the UI.
 
 ### Return values
 #### Async mode
@@ -102,6 +102,8 @@ MIT
 
 
 [`ArrayBuffer`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer "The ArrayBuffer object is used to represent a generic, fixed-length raw binary data buffer. You cannot directly manipulate the contents of an ArrayBuffer; instead, you create one of the typed array objects or a DataView object which represents the buffer in a specific format, and use that to read and write the contents of the buffer."
+
+[`Boolean`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean "The Boolean object is an object wrapper for a boolean value."
 
 [`CanvasRenderingContext2D.getImageData()`]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData "The CanvasRenderingContext2D.getImageData() method of the Canvas 2D API returns an ImageData object representing the underlying pixel data for the area of the canvas denoted by the rectangle which starts at (sx, sy) and has an sw width and sh height. This method is not affected by the canvas transformation matrix."
 
