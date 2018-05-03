@@ -1,7 +1,5 @@
-scale-crop-rotate
-=================
-Scale, crop and rotate images, not blocking UI :unlock:.
-
+Scale, crop and rotate images, not blocking UI  :construction::collision:.
+==========================================================================
 ```javascript
 const image = document.getElementsByTagName('img')[0];
 const progress = document.getElementsByTagName('progress')[0];
