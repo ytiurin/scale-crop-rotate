@@ -3,21 +3,28 @@ Scale, crop and rotate images, not blocking UI  :construction::collision:.
 ```javascript
 const image = document.getElementsByTagName('img')[0];
 const progress = document.getElementsByTagName('progress')[0];
+const source = imgToImageData(image);
 
-scaleCropRotate(imgToImageData(image), 384, 190)
+const width = 384;
+const height = 190;
+
+scaleCropRotate(source, width, height)
 .progress(value => {
   progress.value = value;
 })
 .then(data => {
   image.src = imageDataToDataUrl(imageData);
+})
+.catch(e => {
+  // catch error
 });
 ```
 
 
 
 UI unblock
------------
-Doing image processing in browser may cause significant UI hickups, as the data is processed in a very big loop inside the same [Event loop] iteration. The solution may be to perform image processing in other thread with the help of the [WebWorker][WebWorkers]. However it is possible to avoid blocking the UI thread by performing the work in range of many Event loop iterations.
+----------
+Image processing is an intensive CPU time consumption job. The data is processed in a very big loop inside the same [Event loop] iteration and, done in browser, may cause significant UI hickups. The solution may be to perform image processing in other thread with the help of the [WebWorker][WebWorkers]. However it is possible to avoid blocking the UI thread by performing the work in range of many Event loop iterations.
 
 This function reserves 10ms of every Event loop iteration to process data.
 
@@ -29,7 +36,7 @@ This function uses the technique, proposed by [Paul Rouget] in his [article][1] 
 
 The usage of [`Math`] is avoided in favour of [Bitwise operators], giving a significant boost in performance in some browsers.
 
-To save even more memory and time, scaling, cropping and rotating manipulations are performed in scope of the same loop iteration.
+To save even more memory and time, scaling, cropping and rotating operations are performed in scope of the same loop.
 
 
 
