@@ -3,21 +3,25 @@ Scale, crop and rotate images, not blocking UI  :construction::collision:.
 ```javascript
 const image = document.getElementsByTagName('img')[0];
 const progress = document.getElementsByTagName('progress')[0];
-const source = imgToImageData(image);
 
 const width = 384;
 const height = 190;
 
-scaleCropRotate(source, width, height)
-.progress(value => {
-  progress.value = value;
-})
-.then(data => {
-  image.src = imageDataToDataUrl(imageData);
-})
-.catch(e => {
-  // catch error
-});
+image.onload = async () => {
+  const source = imgToImageData(image);
+
+  try {
+    const data = await scaleCropRotate(source, width, height)
+      .progress(value => {
+        progress.value = value;
+      });
+
+    image.src = imageDataToDataUrl(data);
+  }
+  catch(e) {
+    // catch error
+  }
+}
 ```
 
 
