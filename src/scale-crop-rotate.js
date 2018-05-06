@@ -1,3 +1,5 @@
+var ERROR_ARGUMENT0_TYPE = new TypeError("First arguments should be an instance of ImageData.");
+
 var SCALE_METHOD_IDENTITY = 0;
 var SCALE_METHOD_AVARAGE  = 1;
 var SCALE_METHOD_LINEAR   = 2;
@@ -46,10 +48,20 @@ function scaleCropRotate(sourceImageData)
 {
   var ImageData = ImageData || this.ImageData;
 
+  var args      = arguments;
+  var SYNC_MODE = 0;
+
+  if (args[args.length - 1] === true) {
+    var SYNC_MODE = 1;
+  }
+
   if (!(sourceImageData instanceof ImageData)) {
-    return Promise.reject(
-      new TypeError(
-        "First arguments should be an instance of ImageData."));
+    if (SYNC_MODE) {
+      throw ERROR_ARGUMENT0_TYPE;
+    }
+    else {
+      return Promise.reject(ERROR_ARGUMENT0_TYPE);
+    }
   }
 
   var SOURCE_WIDTH  = sourceImageData.width;
@@ -62,13 +74,6 @@ function scaleCropRotate(sourceImageData)
   var CROP_WIDTH  = SOURCE_WIDTH;
   var CROP_HEIGHT = SOURCE_HEIGHT;
   var ROTATE      = 1;
-  var SYNC_MODE   = 0;
-
-  var args = arguments;
-
-  if (args[args.length - 1] === true) {
-    var SYNC_MODE = 1;
-  }
 
   switch (args.length - (SYNC_MODE >> 0)) {
     case 2:

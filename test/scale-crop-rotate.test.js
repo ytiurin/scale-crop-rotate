@@ -24,6 +24,12 @@ describe('Async mode', () => {
 });
 
 describe('Sync mode', () => {
+  test('Throws an error', () => {
+   expect(() => {
+     scaleCropRotate(true);
+   }).toThrowError('instance of ImageData');
+  });
+
   test('Result should be an instance of ImageData', () => {
     const data = new ImageData(1, 1);
     expect.assertions(1);
