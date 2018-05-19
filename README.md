@@ -60,6 +60,7 @@ Syntax
 ------
 ```javascript
 scaleCropRotate(source[, width, height[, cropX, cropY, cropWidth, cropHeight[, rotate[, enableSyncMode]]]]);
+scaleCropRotate(source[, width, height[, rotate[, enableSyncMode]]]);
 scaleCropRotate(source[, cropX, cropY, cropWidth, cropHeight[, rotate[, enableSyncMode]]]);
 scaleCropRotate(source[, rotate[, enableSyncMode]]);
 ```
