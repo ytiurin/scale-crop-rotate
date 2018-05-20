@@ -16,5 +16,8 @@ setTimeout(function() {
     img.src = scaleCropRotate.imageDataToDataURL(data);
     document.body.appendChild(img);
     checkmark.style.display = 'inline';
+  })
+  .catch(function(e) {
+    console.error(e);
   });
 }, 1000);

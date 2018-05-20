@@ -39,6 +39,9 @@ function filesChanged(files)
         var destImg = document.createElement("img");
         destImg.src = URL.createObjectURL(blob);
         document.getElementById("previews").appendChild(destImg);
+      })
+      .catch(function(e) {
+        console.error(e);
       });
     };
   });

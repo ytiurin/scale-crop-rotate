@@ -1,16 +1,19 @@
 function blobToImageData(blob) {
-  var imageLoaded;
+  var imageLoaded, fileReadError;
 
   function fileRead() {
     var image = new Image;
+    image.addEventListener('error', fileReadError);
     image.addEventListener('load', imageLoaded);
     image.src = this.result;
   }
 
   function initPromise(resolve, reject) {
     imageLoaded = createImageLoadedResolver(resolve);
+    fileReadError = createFileReadRejector(reject, blob);
 
     var reader = new FileReader;
+    reader.addEventListener("error", fileReadError);
     reader.addEventListener("load", fileRead);
     reader.readAsDataURL(blob);
   }
@@ -29,6 +32,13 @@ function createCanvasWithImageData(data) {
   return canvas;
 }
 
+function createFileReadRejector(reject, blob) {
+  return function fileReadError() {
+    this.removeEventListener('error', fileReadError);
+    reject(new Error('Could not read image from file ' + blob.name));
+  }
+}
+
 function createImageLoadedResolver(resolve) {
   return function imageLoaded() {
     this.removeEventListener('load', imageLoaded);
@@ -42,6 +52,13 @@ function createImageLoadedResolver(resolve) {
 
     var data = ctx.getImageData(0, 0, this.naturalWidth, this.naturalHeight);
     resolve(data);
+  }
+}
+
+function createImageLoadRejector(reject, isReadFromFile) {
+  return function imageLoadError() {
+    this.removeEventListener('error', imageLoadError);
+    reject(new URIError('Could not load image by the URI ' + this.src));
   }
 }
 
@@ -61,11 +78,13 @@ function imageDataToDataURL(data, imageType, quality) {
 function imageToImageData(image) {
   function initPromise(resolve, reject) {
     var imageLoaded = createImageLoadedResolver(resolve);
+    var imageLoadError = createImageLoadRejector(reject);
 
     if (image.complete) {
       imageLoaded.bind(image)();
     }
     else {
+      image.addEventListener("error", imageLoadError);
       image.addEventListener("load", imageLoaded);
     }
   }
