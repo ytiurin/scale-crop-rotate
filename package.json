@@ -1,6 +1,6 @@
 {
   "name": "scale-crop-rotate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scale, crop and rotate images, not blocking UI.",
   "main": "./dist/scale-crop-rotate.js",
   "scripts": {
