@@ -29,7 +29,7 @@ build:
 		printf "    }\n"; \
 		printf "}(this, function () {\n\n"; \
 		cat src/*.js; \
-		printf "    return ${GLOBAL_EXPORT_NAME}\n"; \
+		printf "    return scaleCropRotate\n"; \
 		printf "}));"; \
 	) \
 	> dist/scale-crop-rotate.js
