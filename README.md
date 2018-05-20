@@ -1,16 +1,12 @@
 Scale, crop and rotate images, not blocking UI. :construction::collision:
 ==========================================================================
 ```javascript
-import scaleCropRotate, { imageToImageData, imageDataToDataURL } from 'scale-crop-rotate';
+import scaleCropRotate, { imageDataToDataURL, URLToImageData } from 'scale-crop-rotate';
 
-const image = document.getElementsByTagName('img')[0];
 const progress = document.getElementsByTagName('progress')[0];
 
-const width = 384;
-const height = 190;
-
-const resizeImage = async (image, width, height) => {
-  const data = await imageToImageData(image);
+const resizeImage = async (imageURL, width, height) => {
+  const data = await URLToImageData(imageURL);
 
   try {
     const data = await scaleCropRotate(data, width, height)
@@ -21,11 +17,15 @@ const resizeImage = async (image, width, height) => {
     image.src = imageDataToDataURL(data);
   }
   catch(e) {
-    // catch error
+    console.error(e);
   }
 }
 
-resizeImage(image, width, height);
+resizeImage(
+  '/assets/beautiful-landscape.jpg',
+  384, 
+  190
+);
 ```
 
 
@@ -53,6 +53,10 @@ Install
 ```
 npm i scale-crop-rotate
 ```
+or
+```
+yarn add scale-crop-rotate
+```
 
 
 
@@ -60,6 +64,7 @@ Syntax
 ------
 ```javascript
 scaleCropRotate(source[, width, height[, cropX, cropY, cropWidth, cropHeight[, rotate[, enableSyncMode]]]]);
+scaleCropRotate(source[, width, height[, rotate[, enableSyncMode]]]);
 scaleCropRotate(source[, cropX, cropY, cropWidth, cropHeight[, rotate[, enableSyncMode]]]);
 scaleCropRotate(source[, rotate[, enableSyncMode]]);
 ```
