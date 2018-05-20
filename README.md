@@ -6,15 +6,16 @@ import scaleCropRotate, { imageDataToDataURL, URLToImageData } from 'scale-crop-
 const progress = document.getElementsByTagName('progress')[0];
 
 const resizeImage = async (imageURL, width, height) => {
-  const data = await URLToImageData(imageURL);
-
   try {
-    const data = await scaleCropRotate(data, width, height)
+    const data = await URLToImageData(imageURL);
+    const resultData = await scaleCropRotate(data, width, height)
       .progress(value => {
         progress.value = value;
       });
-
-    image.src = imageDataToDataURL(data);
+    
+    const image = new Image;
+    image.src = imageDataToDataURL(resultData);
+    document.body.append(image);
   }
   catch(e) {
     console.error(e);
