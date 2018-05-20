@@ -53,6 +53,10 @@ Install
 ```
 npm i scale-crop-rotate
 ```
+or
+```
+yarn add scale-crop-rotate
+```
 
 
 
