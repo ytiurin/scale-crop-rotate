@@ -108,6 +108,76 @@ An [`ImageData`] containing the resulting image.
 
 
 
+Helper functions
+----------------
+To retrieve an [`ImageData`] out of different conventional data sources, use these functions:
+
+### blobToImageData
+Retrieves an [`ImageData`] from a [`Blob`] object.
+#### Syntax
+```javascript
+scaleCropRotate.blobToImageData(object);
+```
+#### Parameters
+##### object
+A [`Blob`] object to retrieve an [`ImageData`] from.
+#### Return value
+A [`Promise`] that resolves with an [`ImageData`].
+
+
+### imageDataToBlob
+Converts an [`ImageData`] to a [`Blob`] object.
+#### Syntax
+```javascript
+scaleCropRotate.imageDataToBlob(object);
+```
+#### Parameters
+##### object
+An [`ImageData`] object to convert to a [`Blob`] object.
+#### Return value
+A [`Promise`] that resolves with a [`Blob`] object.
+
+
+### imageDataToDataURL
+Converts an [`ImageData`] to a [data URI] string.
+#### Syntax
+```javascript
+scaleCropRotate.imageDataToDataURL(object);
+```
+#### Parameters
+##### object
+An [`ImageData`] object to convert to a [data URI].
+#### Return value
+A [`DOMString`] containing the processed [data URI].
+
+
+### imageToImageData
+Retrieves an [`ImageData`] from [`HTMLImageElement`] object.
+#### Syntax
+```javascript
+scaleCropRotate.imageToImageData(object);
+```
+#### Parameters
+##### object
+An [`HTMLImageElement`] object to retrieve an [`ImageData`] from.
+#### Return value
+A [`Promise`] that resolves with an [`ImageData`].
+
+
+### URLToImageData
+Loads an image from the given URI and retrieves an [`ImageData`].
+#### Syntax
+```javascript
+scaleCropRotate.URLToImageData(URIString);
+```
+#### Parameters
+##### URIString
+A [`DOMString`] containing the URI linking to the image to retrieve an [`ImageData`] from.
+#### Return value
+A [`Promise`] that resolves with an [`ImageData`].
+
+
+
 Other libraries
 ---------------
 Check other great libraries to do in-browser image resizing:
@@ -124,11 +194,15 @@ MIT
 
 [`ArrayBuffer`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer "The ArrayBuffer object is used to represent a generic, fixed-length raw binary data buffer. You cannot directly manipulate the contents of an ArrayBuffer; instead, you create one of the typed array objects or a DataView object which represents the buffer in a specific format, and use that to read and write the contents of the buffer."
 
+[`Blob`]: https://developer.mozilla.org/en-US/docs/Web/API/Blob "A Blob object represents a file-like object of immutable, raw data. Blobs represent data that isn't necessarily in a JavaScript-native format. The File interface is based on Blob, inheriting blob functionality and expanding it to support files on the user's system."
+
 [`Boolean`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean "The Boolean object is an object wrapper for a boolean value."
 
 [`CanvasRenderingContext2D.getImageData()`]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData "The CanvasRenderingContext2D.getImageData() method of the Canvas 2D API returns an ImageData object representing the underlying pixel data for the area of the canvas denoted by the rectangle which starts at (sx, sy) and has an sw width and sh height. This method is not affected by the canvas transformation matrix."
 
 [`DOMString`]: https://developer.mozilla.org/en-US/docs/Web/API/DOMString "DOMString is a UTF-16 String. As JavaScript already uses such strings, DOMString is mapped directly to a String."
+
+[`HTMLImageElement`]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement "The HTMLImageElement interface provides special properties and methods  for manipulating the layout and presentation of <img> elements."
 
 [`ImageData`]: https://developer.mozilla.org/en-US/docs/Web/API/ImageData "The ImageData interface represents the underlying pixel data of an area of a <canvas> element. It is created using the ImageData() constructor or creator methods on the CanvasRenderingContext2D object associated with a canvas: createImageData() and getImageData(). It can also be used to set a part of the canvas by using putImageData()."
 
@@ -139,6 +213,8 @@ MIT
 [`Promise`]: https://developer.mozilla.org/en-US/docs/Web/API/Promise "The Promise interface represents a proxy for a value not necessarily known at its creation time. It allows you to associate handlers to an asynchronous action's eventual success or failure. This lets asynchronous methods return values like synchronous methods: instead of the final value, the asynchronous method returns a promise of having a value at some point in the future."
 
 [1]: https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/ "Faster Canvas Pixel Manipulation with Typed Arrays"
+
+[data URI]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
 
 [Bitwise operators]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators "Bitwise operators treat their operands as a sequence of 32 bits (zeroes and ones), rather than as decimal, hexadecimal, or octal numbers. For example, the decimal number nine has a binary representation of 1001. Bitwise operators perform their operations on such binary representations, but they return standard JavaScript numerical values."
 
