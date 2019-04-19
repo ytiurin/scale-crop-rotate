@@ -1,4 +1,4 @@
-Scale, crop and rotate images, not blocking UI. :construction::collision:
+Scale, crop and rotate images, not blocking UI :unlock:
 ==========================================================================
 ```javascript
 import scaleCropRotate, { imageDataToDataURL, URLToImageData } from 'scale-crop-rotate';
