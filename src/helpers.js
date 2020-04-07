@@ -93,6 +93,7 @@ function imageToImageData(image) {
 
 function URLToImageData(url) {
   var image = new Image;
+  image.crossOrigin = "Anonymous";
   image.src = url;
   return imageToImageData(image);
 }

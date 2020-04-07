@@ -8,7 +8,7 @@
     "postpublish": "make postpublish",
     "prepare": "npm run build",
     "pretest": "npm run build",
-    "start": "http-server ./ -c-1",
+    "start": "http-server ./dist -c-1 -p 8081 --cors & http-server ./assets -c-1 -p 8082 --cors & http-server -c-1 ./example --cors",
     "test": "jest"
   },
   "repository": {
