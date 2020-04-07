@@ -1,38 +1,39 @@
-# Scale, crop and rotate images, not blocking UI :unlock:
+# Inbrowser scale, crop and rotate images, without blocking the Event loop.
 
 ```javascript
 import scaleCropRotate, {
-  imageDataToDataURL,
-  URLToImageData
+  blobToImageData,
+  imageDataToBlob
 } from "scale-crop-rotate";
 
-const progress = document.getElementsByTagName("progress")[0];
+const formData = new FormData();
 
-const resizeImage = async (imageURL, width, height) => {
-  try {
-    const data = await URLToImageData(imageURL);
-    const resultData = await scaleCropRotate(data, width, height).progress(
-      value => {
-        progress.value = value;
-      }
-    );
+const onFileChange = async fileBlob => {
+  const imageData = await blobToImageData(fileBlob);
+  const resultData = await scaleCropRotate(imageData, 600, 600);
+  const resultBlob = await imageDataToBlob(resultData);
 
-    const image = new Image();
-    image.src = imageDataToDataURL(resultData);
-    document.body.append(image);
-  } catch (e) {
-    console.error(e);
-  }
+  formData.set("userpic", resultBlob, fileBlob.name);
 };
 
-resizeImage("/assets/beautiful-landscape.jpg", 384, 190);
+const onFormSubmit = () => {
+  var request = new XMLHttpRequest();
+  request.open("POST", "https://myapp.foo/form");
+  request.send(formData);
+};
 ```
 
-## UI unblock
+```html
+<form onsubmit="onFormSubmit()">
+  <input type="file" accept="image/*" onchange="onFileChange(this.files[0])" />
+</form>
+```
 
-Image processing is an intensive CPU time consumption job. The data is processed in a very big loop inside the same [Event loop] iteration and, done in browser, may cause significant UI hickups. The solution may be to perform image processing in other thread with the help of the [WebWorker][webworkers]. However it is possible to avoid blocking the UI thread by performing the work in range of many Event loop iterations.
+## Prevent blocking the Event loop
 
-This function reserves 10ms of every Event loop iteration to process data.
+> This function reserves 10ms of every Event loop iteration to process data.
+
+Image processing is an intensive CPU time consumption job. The data is processed in a very big loop inside the same [Event loop] iteration and, done in browser, may cause significant UI hickups. The solution may be to perform image processing in other thread with the help of the [WebWorker][webworkers]. However, it is possible to avoid blocking the UI thread by performing the work in range of many Event loop iterations.
 
 ## Performance
 
@@ -95,7 +96,7 @@ scaleCropRotate(source[, rotate[, enableSyncMode]]);
 
 - **rotate**
 
-  A [`Number`] representing the [Exif Orientation Tag], or a [`DOMString`] containig one of predefined rotation values: `90deg`, `180deg`, `270deg`, `horizontal`, `vertical`. Last two predefined values allow to mirror image horizontally and vertically.
+  A [`Number`] representing the [Exif Orientation Tag], or a [`DOMString`] containing one of predefined rotation values: `90deg`, `180deg`, `270deg`, `horizontal`, `vertical`. Last two predefined values allow to mirror image horizontally and vertically.
 
 - **enableSyncMode**
 
